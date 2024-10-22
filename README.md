@@ -68,7 +68,9 @@
 2. Add static resources
 3. Modify user model => authService => authController
 4. Modify views
-   * main layout with dynamic navigation
+   * main layout
+      - dynamic navigation
+      - change css link
    * index / 404
    * login / register
    * set page titles
