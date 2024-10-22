@@ -11,15 +11,15 @@ authController.get('/register', isGuest, (req, res) => {
 });
 
 authController.post('/register', isGuest, async (req, res) => {
-    const { name, email, password, rePassword } = req.body;
+    const { username, email, password, rePassword } = req.body;
 
     try{
-        const token = await authService.register(name, email, password, rePassword);
+        const token = await authService.register(username, email, password, rePassword);
         res.cookie(AUTH_COOKIE_NAME, token, { httpOnly: true });
         res.redirect('/');
     } catch(err) {
         const error = getErrorMessage(err);
-        res.render('auth/register', {title: 'TechStore - Register', name, email, error});
+        res.render('auth/register', {title: 'TechStore - Register', username, email, error});
     }
 });
 

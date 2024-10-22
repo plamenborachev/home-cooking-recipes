@@ -8,11 +8,11 @@ const EMAIL_MIN_LENGTH = 10;
 const PASSWORD_MIN_LENGTH = 4;
 
 const userSchema = new Schema({
-    name: {
+    username: {
         type: String,
-        required: [true, 'Name is required!'],
-        minLength: [USERNAME_MIN_LENGTH, `Your name should be at least ${USERNAME_MIN_LENGTH} characters long, got '{VALUE}'!`],
-        maxLength: [USERNAME_MAX_LENGTH, `Your name should be not longer than ${USERNAME_MAX_LENGTH} characters, got '{VALUE}'!`],
+        required: [true, 'Username is required!'],
+        minLength: [USERNAME_MIN_LENGTH, `Your username should be at least ${USERNAME_MIN_LENGTH} characters long, got '{VALUE}'!`],
+        maxLength: [USERNAME_MAX_LENGTH, `Your username should be not longer than ${USERNAME_MAX_LENGTH} characters, got '{VALUE}'!`],
     },
     email: {
         type: String,

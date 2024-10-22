@@ -66,7 +66,7 @@
 ## Exam Steps
 1. Modify DB name & project name in package.json and package-lock.json
 2. Add static resources
-3. Modify user model
+3. Modify user model => authService => authController
 4. Modify views
    * main layout with dynamic navigation
    * index / 404
