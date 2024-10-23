@@ -14,3 +14,4 @@ export const TITLE_REGISTER_PAGE = 'Register - Home Cooking Recipes';
 
 export const TITLE_CREATE_PAGE = 'Create Recipe - Home Cooking Recipes';
 export const TITLE_CATALOG_PAGE = 'Recipe Catalog - Home Cooking Recipes';
+export const TITLE_DETAILS_PAGE = ' - Home Cooking Recipes';

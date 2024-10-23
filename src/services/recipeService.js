@@ -10,14 +10,14 @@ const getAll = () => Recipe.find();
 
 const create = (recipe, ownerId) => Recipe.create({ ...recipe, owner: ownerId });
 
-// const getOne = (deviceId) => Device.findById(deviceId).populate('preferredList');
+const getOne = (recipeId) => Recipe.findById(recipeId).populate('recommendList');
 
-// const prefer = (deviceId, userId) => {
-//     // const movie = await Movie.findById(movieId);
-//     // movie.casts.push(castId);
-//     // return movie.save();
-//     return Device.findByIdAndUpdate(deviceId, { $push: { preferredList: userId } });
-// };
+const recommend = (recipeId, userId) => {
+    // const movie = await Movie.findById(movieId);
+    // movie.casts.push(castId);
+    // return movie.save();
+    return Recipe.findByIdAndUpdate(recipeId, { $push: { recommendList: userId } });
+};
 
 // const remove = (deviceId) => Device.findByIdAndDelete(deviceId);
 
@@ -29,8 +29,8 @@ export default {
     // getDevicesCreatedByUser,
     // getDevicesPreferredByUser,
     create,
-    // getOne,
-    // prefer,
+    getOne,
+    recommend,
     // remove,
     // edit,
 }
