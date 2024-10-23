@@ -11,3 +11,6 @@ export const AUTH_COOKIE_NAME = 'auth';
 export const TITLE_HOME_PAGE = 'Home Cooking Recipes';
 export const TITLE_LOGIN_PAGE = 'Login - Home Cooking Recipes';
 export const TITLE_REGISTER_PAGE = 'Register - Home Cooking Recipes';
+
+export const TITLE_CREATE_PAGE = 'Create Recipe - Home Cooking Recipes';
+export const TITLE_CATALOG_PAGE = 'Recipe Catalog - Home Cooking Recipes';
