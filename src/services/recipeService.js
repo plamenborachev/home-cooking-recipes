@@ -1,6 +1,25 @@
 import Recipe from "../models/Recipes.js";
 
-const getAll = () => Recipe.find();
+const getAll = (filter = {}) => {
+    let recipesQuery = Recipe.find();
+
+    if (filter.search) {
+        recipesQuery.find({ title: { $regex: filter.search, $options: 'i' } });
+        // moviesQuery.regex('title', new RegExp(filter.name, 'i'))
+    }
+
+    // if (filter.typeVolcano) {
+    //     recipesQuery.find({ typeVolcano: filter.typeVolcano });
+        // moviesQuery.where('genre').equals(filter.genre.toLowerCase())
+    // }
+
+    // if (filter.year) {
+    //     volcanoesQuery.find({ year: filter.year });
+    //     // moviesQuery.where('year').equals(filter.year);
+    // }
+
+    return recipesQuery;
+};
 
 const getTopThree = () => Recipe.find().sort({createdAt: -1}).limit(3);
 

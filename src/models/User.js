@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 
 const SALT_ROUNDS = 10;
 const USERNAME_MIN_LENGTH = 2;
-const USERNAME_MAX_LENGTH = 10;
+const USERNAME_MAX_LENGTH = 20;
 const EMAIL_MIN_LENGTH = 10;
 const PASSWORD_MIN_LENGTH = 4;
 

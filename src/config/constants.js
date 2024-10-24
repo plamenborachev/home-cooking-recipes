@@ -16,3 +16,4 @@ export const TITLE_CREATE_PAGE = 'Create Recipe - Home Cooking Recipes';
 export const TITLE_CATALOG_PAGE = 'Recipe Catalog - Home Cooking Recipes';
 export const TITLE_DETAILS_PAGE = ' - Home Cooking Recipes';
 export const TITLE_EDIT_PAGE = 'Edit Recipe - Home Cooking Recipes';
+export const TITLE_SEARCH_PAGE = 'Search Recipes - Home Cooking Recipes';

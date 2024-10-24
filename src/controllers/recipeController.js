@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { isAuth } from "../middlewares/authMiddleware.js";
 import { getErrorMessage } from "../utils/errorUtils.js";
-import { TITLE_CATALOG_PAGE, TITLE_CREATE_PAGE, TITLE_DETAILS_PAGE, TITLE_EDIT_PAGE } from "../config/constants.js";
+import { TITLE_CATALOG_PAGE, TITLE_CREATE_PAGE, TITLE_DETAILS_PAGE, TITLE_EDIT_PAGE, TITLE_SEARCH_PAGE } from "../config/constants.js";
 import recipeService from "../services/recipeService.js";
 
 const recipeController = Router();
@@ -126,6 +126,13 @@ recipeController.post('/edit/:recipeId', isAuth, async (req, res) => {
         const errorMessage = getErrorMessage(err);
         return res.render('recipe/edit', { error: errorMessage, recipe: recipeData, title: TITLE_EDIT_PAGE});
     }
+});
+
+recipeController.get('/search', async (req, res) => {
+    const filter = req.query;
+    // console.log(filter);
+    const recipes = await recipeService.getAll(filter).lean();
+    res.render('recipe/search', { isSearch: true, recipes, filter, title: TITLE_SEARCH_PAGE});
 });
 
 async function checkOwnerAndRecommended(req, res) {
