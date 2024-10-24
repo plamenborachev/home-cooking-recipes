@@ -71,6 +71,28 @@ recipeController.get('/recommend/:recipeId', isAuth, async (req, res) => {
     }    
 });
 
+recipeController.get('/delete/:recipeId', isAuth, async (req, res) => {
+    const recipeId = req.params.recipeId;
+    const { recipe, isOwner, recommended } = await checkOwnerAndRecommended(req, res);
+
+    // Check if owner
+    if (!isOwner) {
+        return res.render('recipe/details',
+            { recipe, isOwner: false, recommended, error: 'You cannot delete this recipe!', title: recipe.title + TITLE_DETAILS_PAGE});
+        // res.setError('You cannot delete this volcano!');
+        // return res.redirect('/404');
+    }
+
+    try {
+        await recipeService.remove(recipeId);
+        res.redirect('/recipes/catalog');
+    } catch (err) {
+        console.log(err);       
+        // const errorMessage = getErrorMessage(err);
+        // return res.render('volcano/details', { volcano: volcano, error: err , title: 'Details'});
+    }
+});
+
 async function checkOwnerAndRecommended(req, res) {
     const recipeId = req.params.recipeId;
     const userId = req.user?._id;

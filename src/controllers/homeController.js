@@ -1,10 +1,12 @@
 import { Router } from 'express';
 import { TITLE_HOME_PAGE } from '../config/constants.js';
+import recipeService from '../services/recipeService.js';
 
 const homeController = Router();
 
-homeController.get('/', (req, res) => {
-    res.render('home', {title: TITLE_HOME_PAGE});
+homeController.get('/', async (req, res) => {
+    const getTopThreeRecipes = await recipeService.getTopThree().lean();
+    res.render('home', {getTopThreeRecipes, title: TITLE_HOME_PAGE});
 });
 
 // homeController.get('/about', (req, res) => {

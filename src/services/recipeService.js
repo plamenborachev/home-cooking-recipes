@@ -2,7 +2,7 @@ import Recipe from "../models/Recipes.js";
 
 const getAll = () => Recipe.find();
 
-// const getTopThree = () => Device.find().sort({createdAt: -1}).limit(3);
+const getTopThree = () => Recipe.find().sort({createdAt: -1}).limit(3);
 
 // const getDevicesCreatedByUser = (ownerId) => Device.find({owner: ownerId});
 
@@ -19,18 +19,18 @@ const recommend = (recipeId, userId) => {
     return Recipe.findByIdAndUpdate(recipeId, { $push: { recommendList: userId } });
 };
 
-// const remove = (deviceId) => Device.findByIdAndDelete(deviceId);
+const remove = (recipeId) => Recipe.findByIdAndDelete(recipeId);
 
 // const edit = (deviceId, data) => Device.findByIdAndUpdate(deviceId, data, {runValidators: true});
 
 export default {
     getAll,
-    // getTopThree,
+    getTopThree,
     // getDevicesCreatedByUser,
     // getDevicesPreferredByUser,
     create,
     getOne,
     recommend,
-    // remove,
+    remove,
     // edit,
 }
