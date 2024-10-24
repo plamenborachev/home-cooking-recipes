@@ -21,7 +21,7 @@ const recommend = (recipeId, userId) => {
 
 const remove = (recipeId) => Recipe.findByIdAndDelete(recipeId);
 
-// const edit = (deviceId, data) => Device.findByIdAndUpdate(deviceId, data, {runValidators: true});
+const edit = (recipeId, data) => Recipe.findByIdAndUpdate(recipeId, data, {runValidators: true});
 
 export default {
     getAll,
@@ -32,5 +32,5 @@ export default {
     getOne,
     recommend,
     remove,
-    // edit,
+    edit,
 }

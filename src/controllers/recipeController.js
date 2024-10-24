@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { isAuth } from "../middlewares/authMiddleware.js";
 import { getErrorMessage } from "../utils/errorUtils.js";
-import { TITLE_CATALOG_PAGE, TITLE_CREATE_PAGE, TITLE_DETAILS_PAGE } from "../config/constants.js";
+import { TITLE_CATALOG_PAGE, TITLE_CREATE_PAGE, TITLE_DETAILS_PAGE, TITLE_EDIT_PAGE } from "../config/constants.js";
 import recipeService from "../services/recipeService.js";
 
 const recipeController = Router();
@@ -90,6 +90,41 @@ recipeController.get('/delete/:recipeId', isAuth, async (req, res) => {
         console.log(err);       
         // const errorMessage = getErrorMessage(err);
         // return res.render('volcano/details', { volcano: volcano, error: err , title: 'Details'});
+    }
+});
+
+recipeController.get('/edit/:recipeId', isAuth, async (req, res) => {
+    const { recipe, isOwner, recommended } = await checkOwnerAndRecommended(req, res);
+
+    if (!isOwner) {
+        return res.render('recipe/details',
+            { recipe, isOwner: false, recommended, error: 'You cannot edit this recipe!', title: recipe.title + TITLE_DETAILS_PAGE});
+        // res.setError('You cannot delete this movie!');
+        // return res.redirect('/404');
+    }  
+
+    res.render('recipe/edit', { recipe, title: TITLE_EDIT_PAGE});
+});
+
+recipeController.post('/edit/:recipeId', isAuth, async (req, res) => {
+    const recipeData = req.body;
+    const recipeId = req.params.recipeId;
+
+    const { recipe, isOwner, recommended } = await checkOwnerAndRecommended(req, res);
+
+    if (!isOwner) {
+        return res.render('recipe/details',
+            { recipe, isOwner: false, recommended, error: 'You cannot edit this recipe!', title: recipe.title + TITLE_DETAILS_PAGE});
+        // res.setError('You cannot delete this movie!');
+        // return res.redirect('/404');
+    }  
+
+    try {
+        await recipeService.edit(recipeId, recipeData);
+        res.redirect(`/recipes/details/${recipeId}`);
+    } catch (err) {
+        const errorMessage = getErrorMessage(err);
+        return res.render('recipe/edit', { error: errorMessage, recipe: recipeData, title: TITLE_EDIT_PAGE});
     }
 });
 
